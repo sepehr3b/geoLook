@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>geolook - what's near you</title>
+
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <link href="../css/main.css" rel="stylesheet">
+    <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/font-awesome-4.6.2/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../lib/w3/w3.css" rel="stylesheet">
+    <link href="../lib/leaflet/leaflet.css" rel="stylesheet">
+    <style>
+        body{
+            direction: rtl;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+<nav class="w3-sidenav w3-black w3-card-2 w3-animate-top w3-center w3-xxlarge" style="display:none;padding-top:220px">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-jumbo w3-right w3-display-topright" style="padding:6px 24px">
+        <i class="fa fa-remove"></i>
+    </a>
+    <a href="../index.html" class="w3-text-grey w3-hover-black"><i class="fa fa-home" ></i> خانه</a>
+    <a href="../html/map.html" class="w3-text-grey w3-hover-black"><i class="fa fa-map" ></i> نقشه</a>
+    <a href="../html/place.html" class="w3-text-grey w3-hover-black"><i class="fa fa-map-pin" ></i> نزدیک شما</a>
+    <a href="javascript:void(0)" class="w3-text-grey w3-hover-black"><i class="fa fa-info" ></i> درباره ما</a>
+</nav>
+
+<div class="w3-container w3-padding-32 w3-center  w3-margin-bottom">
+    <span class="w3-opennav w3-xxlarge w3-right w3-margin-right" onclick="w3_open()"><i class="fa fa-bars" style="color: white"></i></span>
+    <a href="../index.html" class="w3-left w3-hover-opacity" style="text-decoration: none">
+        <img src="../img/geo.png" class="w3-hover-opacity" height="60px">
+        <h1 style="color: white;font-family:en_gf;font-size: 30px">geoLook</h1>
+    </a>
+
+    <div class="w3-clear"></div>
+</div>
+
+
+    <div class=" w3-blue-grey w3-container" >
+        <div class="w3-padding-64 w3-center">
+            <h1 style="font-family: geof">درباره من</h1>
+            <img src="../img/avt.png" class="w3-margin w3-circle"  style="width:200px;height: 200px">
+            <div class="w3-right-align w3-padding-xxlarge">
+                <p align="justify">من سپهر بهنامی فر متولد سال 1371 و دانش آموخته مهندسی کامپیوتر گرایش سخت افزار از دانشگاه آزاد اسلامی قزوین و همچنین دانشجو کارشناسی ارشد ................در دانشگاه  ............ هستم.</p>
+            </div>
+        </div>
+    </div>
+
+<div style="background-color: darkred;height: 10px"></div>
+
+<div  class="w3-container w3-light-green">
+    <h1 class="w3-center" style="font-family: geof;color: orangered">مهارت ها</h1>
+    <div class="w3-row-padding w3-margin-bottom w3-margin-top w3-light-green">
+    <div class="w3-quarter">
+        <div class="w3-container w3-red w3-padding-16">
+            <div class="w3-left"><i class="fa fa-html5 w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3 style="font-family: en_gf">HTML</h3>
+            </div>
+            <div class="w3-clear"></div>
+        </div>
+    </div>
+    <div class="w3-quarter">
+        <div class="w3-container w3-blue w3-padding-16">
+            <div class="w3-left"><i class="fa fa-css3 w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3 style="font-family: en_gf">CSS</h3>
+            </div>
+            <div class="w3-clear"></div>
+        </div>
+    </div>
+    <div class="w3-quarter">
+        <div class="w3-container w3-teal w3-padding-16">
+            <div class="w3-left"><i class="fa fa-code w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3 style="font-family: en_gf">JavaScript</h3>
+            </div>
+            <div class="w3-clear"></div>
+        </div>
+    </div>
+    <div class="w3-quarter">
+        <div class="w3-container w3-orange w3-text-white w3-padding-16">
+            <div class="w3-left"><i class="fa fa-database w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3 style="font-family: en_gf">SQL & noSQL</h3>
+            </div>
+            <div class="w3-clear"></div>
+        </div>
+    </div>
+</div>
+    <div class="w3-padding" style="margin:0 -16px;margin-top: 10px">
+            <table class="w3-table w3-striped w3-white">
+                <tr>
+                    <td class="w3-right"><i class="fa fa-sitemap w3-blue w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">CCNA</td>
+                </tr>
+                <tr>
+                    <td class="w3-right"><i class="fa fa-linux w3-red w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">Linux</td>
+                </tr>
+                <tr>
+                    <td class="w3-right"><i class="fa fa-file-code-o w3-orange w3-text-white w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">PHP</td>
+                </tr>
+                <tr>
+                    <td class="w3-right"><i class="fa fa-terminal w3-red w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">Python</td>
+                </tr>
+                <tr>
+                    <td class="w3-right"><i class="fa fa-coffee w3-light-blue w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">Java</td>
+                </tr>
+                <tr>
+                    <td class="w3-right"><i class="fa fa-code w3-red w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">#C++ & C</td>
+                </tr>
+                <tr>
+                    <td class="w3-right"><i class="fa fa-desktop w3-green w3-padding-tiny"></i></td>
+                    <td style="font-family: en_gf">...</td>
+                </tr>
+            </table>
+    </div>
+
+</div>
+
+
+
+<div style="background-color: darkblue;height: 10px"></div>
+
+
+    <div class="w3-container  w3-padding-64 w3-center w3-white" >
+    <h2 style="font-family: geof" class=" w3-center">ارتباط</h2>
+    <div class="w3-padding-32">
+        <div class=" w3-large w3-margin-bottom" style="font-family: en_gf">
+            <i class="fa fa-map-marker" style="width:30px"></i> Tehran, Iran<br>
+            <i  class="fa fa-envelope" style="width:30px"> </i> Email: sepehr.3b@gmail.com<br>
+        </div>
+    </div>
+</div>
+
+<div style="background-color: darkorange;height: 10px"></div>
+
+
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity" >
+    <div class="w3-xlarge w3-padding-32" style="color: white">
+        <a href="https://github.com/sepehr3b" class="w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-github"></i></a>
+        <a href="https://codepen.io/sepehr3b/" class="w3-hover-text-grey w3-show-inline-block"><i class="fa fa-codepen"></i></a>
+        <a href="https://ir.linkedin.com/in/sepehr-behnami-889ab092" class="w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
+    </div>
+    <p style="color: white">طراحی و توسعه توسط <a href="https://ir.linkedin.com/in/sepehr-behnami-889ab092" target="_blank">سپهر بهنامی فر</a></p>
+</footer>
+
+
+
+
+<script>
+    function w3_open() {
+        document.getElementsByClassName("w3-sidenav")[0].style.width = "100%";
+        document.getElementsByClassName("w3-sidenav")[0].style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
+    }
+
+
+
+
+
+</script>
+
+<script src="../lib/bootstrap/bootstrap.min.js"></script>
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../js/main.js"></script>
+
+</body>
+
+</html>

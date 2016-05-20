@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>geolook - what's near you</title>
+
+    <script src="../lib/angularjs/angular.min.js"></script>
+    <script src="../lib/angularjs/angularjs-geolocation.min.js"></script>
+
+
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="../lib/leaflet/leaflet-routing-machine.js" ></script>
+
+
+    <link href="../lib/leaflet/leaflet-routing-machine.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+    <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/font-awesome-4.6.2/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../lib/w3/w3.css" rel="stylesheet">
+    <link href="../lib/leaflet/leaflet.css" rel="stylesheet">
+    <style>
+        body{
+            direction: rtl;
+        }
+    </style>
+
+
+</head>
+
+<body ng-app="myApp">
+
+
+<nav class="w3-sidenav w3-black w3-card-2 w3-animate-top w3-center w3-xxlarge" style="display:none;padding-top:220px">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-closenav w3-jumbo w3-right w3-display-topright" style="padding:6px 24px">
+        <i class="fa fa-remove"></i>
+    </a>
+    <a href="../index.html" class="w3-text-grey w3-hover-black"><i class="fa fa-home" ></i> خانه</a>
+    <a href="../html/map.html" class="w3-text-grey w3-hover-black"><i class="fa fa-map" ></i> نقشه</a>
+    <a href="javascript:void(0)" class="w3-text-grey w3-hover-black"><i class="fa fa-map-pin" ></i> نزدیک شما</a>
+    <a href="../html/about.html" class="w3-text-grey w3-hover-black"><i class="fa fa-info" ></i> درباره ما</a>
+</nav>
+
+<div class="w3-container w3-padding-32 w3-center  w3-margin-bottom">
+    <span class="w3-opennav w3-xxlarge w3-right w3-margin-right" onclick="w3_open()"><i class="fa fa-bars" style="color: white"></i></span>
+    <a href="../index.html" class="w3-left w3-hover-opacity" style="text-decoration: none">
+        <img src="../img/geo.png" class="w3-hover-opacity" height="60px">
+        <h1 style="color: white;font-family:en_gf;font-size: 30px">geoLook</h1>
+    </a>
+
+    <div class="w3-clear"></div>
+</div>
+
+<div action="form.asp" class="w3-card-4 w3-white">
+
+    <div class="w3-container w3-cyan w3-text-white">
+        <h2 style="font-family: geof">مکان ها</h2>
+    </div>
+
+
+
+    <form class="w3-container" >
+        <p>
+            <input class="w3-input w3-border w3-light-blue w3-margin-top" name="first" ng-model="query" type="text" placeholder="جستجو" >
+        </p>
+    </form>
+
+
+</div>
+
+
+<div class="wrapper w3-container w3-white">
+    <ul class="flex cards w3-center"  ng-controller="myCtrl" >
+
+        <li ng-repeat="x in data | filter:query">
+            <div class="w3-card-4">
+                <header class="w3-container w3-light-grey">
+                    <h5 style="font-family: geof,en_gf">{{x.name}}</h5>
+                </header>
+                <div class="w3-container">
+                    <p style="font-family: en_gf">Distance: {{x.location.distance}} m</p>
+                    <p style="font-family: en_gf">Tel:{{x.contact.phone}}</p>
+                    <hr>
+                    <p style="font-family: geof,en_gf">{{x.location.address}}</p>
+                    <p style="font-family: geof,en_gf">{{x.location.crossStreet}}</p>
+                </div>
+                <button onclick="document.getElementById('id01').style.display='block'" ng-click="getdist(x.location.lat,x.location.lng)" class="w3-btn-block w3-cyan"><i class="fa fa-map-marker"></i>مسیریابی</button>
+
+
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity" >
+    <div class="w3-xlarge w3-padding-32" style="color: white">
+        <a href="https://github.com/sepehr3b" class="w3-hover-text-light-blue w3-show-inline-block"><i class="fa fa-github"></i></a>
+        <a href="https://codepen.io/sepehr3b/" class="w3-hover-text-grey w3-show-inline-block"><i class="fa fa-codepen"></i></a>
+        <a href="https://ir.linkedin.com/in/sepehr-behnami-889ab092" class="w3-hover-text-indigo w3-show-inline-block"><i class="fa fa-linkedin"></i></a>
+    </div>
+    <p style="color: white">طراحی و توسعه توسط <a href="https://ir.linkedin.com/in/sepehr-behnami-889ab092" target="_blank">سپهر بهنامی فر</a></p>
+</footer>
+
+    <div id="id01" class="w3-modal w3-animate-opacity" ng-controller="myCtrl">
+        <div class="w3-modal-content w3-card-8">
+            <header class="w3-container w3-cyan ">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn w3-left">&times;</span>
+                <h2 style="font-family: geof">نقشه</h2>
+            </header>
+                <div id="mapid2"  style="height: 70vh">
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    function w3_open() {
+        document.getElementsByClassName("w3-sidenav")[0].style.width = "100%";
+        document.getElementsByClassName("w3-sidenav")[0].style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementsByClassName("w3-sidenav")[0].style.display = "none";
+    }
+</script>
+
+<script src="../lib/bootstrap/bootstrap.min.js"></script>
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../js/list.js"></script>
+
+</body>
+
+</html>
