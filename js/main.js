@@ -4,7 +4,7 @@
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
-
+        alert(pos.lat);
         var newmap = L.map('mapid').setView([pos.lat, pos.lng], 16);
 
 
